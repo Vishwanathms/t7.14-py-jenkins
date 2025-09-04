@@ -39,6 +39,17 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to minikube') {
+            steps {
+                script {
+                    sh ' kubectl delete python-deploy.yaml || true'
+                   sh ' kubectl apply -f python-deploy.yaml'
+                }
+            }
+        }
+
+       
+
     }
 
     post {
