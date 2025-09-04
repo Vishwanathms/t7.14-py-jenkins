@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'java' }
+    agent any
 
     environment {
         DOCKERHUB_USER = 'vishwacloudlab'
