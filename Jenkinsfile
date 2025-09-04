@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/your-username/jenkins-docker-lab.git'
+                    url: 'git@github.com:Vishwanathms/t7.14-py-jenkins.git'
             }
         }
 
