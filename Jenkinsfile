@@ -18,7 +18,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker image rmi vishwacloudlab/jenkins-docker-lab:latest'
+                    sh 'docker rm  jenkins_app -f'
+                    sh 'docker image rmi $DOCKERHUB_USER/$IMAGE_NAME:latest'
                     sh 'docker build -t $DOCKERHUB_USER/$IMAGE_NAME:latest .'
                 }
             }
@@ -34,7 +35,7 @@ pipeline {
         stage('Deploy (Run Container)') {
             steps {
                 script {
-                    sh 'docker run -d -p 5000:5000 --name jenkins_app $DOCKERHUB_USER/$IMAGE_NAME:latest'
+                   sh 'docker run -d -p 5000:5000 --name jenkins_app $DOCKERHUB_USER/$IMAGE_NAME:latest'
                 }
             }
         }
