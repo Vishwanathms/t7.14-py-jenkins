@@ -18,6 +18,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    sh 'docker image rmi vishwacloudlab/jenkins-docker-lab:latest'
                     sh 'docker build -t $DOCKERHUB_USER/$IMAGE_NAME:latest .'
                 }
             }
