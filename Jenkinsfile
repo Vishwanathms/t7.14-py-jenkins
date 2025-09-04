@@ -18,8 +18,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh 'docker rm  jenkins_app -f'
-                    sh 'docker image rmi $DOCKERHUB_USER/$IMAGE_NAME:latest'
+                    sh 'docker rm  jenkins_app -f || true'
+                    sh 'docker image rmi $DOCKERHUB_USER/$IMAGE_NAME:latest || true' 
                     sh 'docker build -t $DOCKERHUB_USER/$IMAGE_NAME:latest .'
                 }
             }
