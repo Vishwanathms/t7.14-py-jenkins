@@ -39,11 +39,11 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to minikube') {
+        stage('Deploy to Kuberentes') {
             steps {
                 script {
                     sh ' kubectl delete python-deploy.yaml || true'
-                   sh ' kubectl apply -f python-deploy.yaml'
+                    sh ' kubectl apply -f python-deploy.yaml'
                 }
             }
         }
