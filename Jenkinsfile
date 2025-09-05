@@ -10,8 +10,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main',
-                    url: 'git@github.com:Vishwanathms/t7.14-py-jenkins.git', credentialsId: 'github_cred_key'
+                git branch: 'main', url: 'git@github.com:Vishwanathms/t7.14-py-jenkins.git', credentialsId: 'github_cred_key'
             }
         }
 
