@@ -48,6 +48,9 @@ pipeline {
         stage('Deploy to Kuberentes') {
             steps {
                 script {
+                    sh 'kubectl config get-contexts'
+                    sh 'export KUBECONFIG=/home/jenkins/.kube/config'
+                    sh 'kubectl config get-contexts'
                     sh ' kubectl delete kube-files/python-deploy.yaml || true'
                     sh ' kubectl apply -f kube-files/python-deploy.yaml'
                 }
