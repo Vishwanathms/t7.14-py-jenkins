@@ -8,15 +8,16 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Code') {
-            steps {
-                git branch: 'main', url: 'git@github.com:Vishwanathms/t7.14-py-jenkins.git', credentialsId: 'github_cred_key'
-            }
-        }
+        // stage('Checkout Code') {
+        //     steps {
+        //         git branch: 'main', url: 'git@github.com:Vishwanathms/t7.14-py-jenkins.git', credentialsId: 'github_cred_key'
+        //     }
+        // }
 
         stage('Clean up image and container') {
             steps {
                 script {
+                    sh 'git clone git@github.com:Vishwanathms/t7.14-py-jenkins.git'
                     sh 'docker rm  jenkins_app -f || true'
                     sh 'docker image rmi $DOCKERHUB_USER/$IMAGE_NAME:latest || true' 
                 }
