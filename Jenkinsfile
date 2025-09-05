@@ -47,8 +47,8 @@ pipeline {
         stage('Deploy to Kuberentes') {
             steps {
                 script {
-                    sh ' kubectl delete python-deploy.yaml || true'
-                    sh ' kubectl apply -f python-deploy.yaml'
+                    sh ' kubectl delete kube-files/python-deploy.yaml || true'
+                    sh ' kubectl apply -f kube-files/python-deploy.yaml'
                 }
             }
         }
