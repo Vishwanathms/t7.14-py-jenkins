@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "python-app.fullname" . }}
+  name: {{ .Chart.Name }}
   labels:
-    app: {{ include "python-app.name" . }}
+    app: {{ .Chart.Name }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "python-app.name" . }}
+      app: {{ .Chart.Name }}
   template:
     metadata:
       labels:
-        app: {{ include "python-app.name" . }}
+        app: {{ .Chart.Name }}
     spec:
       containers:
         - name: python
