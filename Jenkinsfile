@@ -15,11 +15,16 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Clean up image and container') {
             steps {
                 script {
                     sh 'docker rm  jenkins_app -f || true'
                     sh 'docker image rmi $DOCKERHUB_USER/$IMAGE_NAME:latest || true' 
+                }
+            }              
+        stage('Build Docker Image') {
+            steps {
+                script {
                     sh 'docker build -t $DOCKERHUB_USER/$IMAGE_NAME:latest .'
                 }
             }
