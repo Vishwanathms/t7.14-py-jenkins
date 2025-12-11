@@ -16,7 +16,7 @@ spec:
         - name: flask-app
           image: vishwacloudlab/pythonapp:v4-var
           ports:
-            - containerPort: 5000
+            - containerPort: 8000
           env:
             - name: REDIS_HOST
               value: "redis-service"   # Kubernetes Service name for Redis
@@ -36,5 +36,5 @@ spec:
   selector:
     app: flask-redis-app
   ports:
-    - port: 5000
-      targetPort: 5000
+    - port: 80
+      targetPort: 8000
