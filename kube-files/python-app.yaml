@@ -32,10 +32,9 @@ kind: Service
 metadata:
   name: flask-redis-service
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: flask-redis-app
   ports:
     - port: 5000
       targetPort: 5000
-      nodePort: 30080
