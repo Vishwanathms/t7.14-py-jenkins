@@ -1,5 +1,8 @@
 replicaCount: 2
 
+labels:
+  app: u16-python-app
+
 image:
   #repository: vishwacloudlab/jenkins-docker-lab
   repository: vishwacloudlab/pythonapp
@@ -27,3 +30,6 @@ redis:
     pullPolicy: IfNotPresent
   service:
     port: 6379
+
+networkPolicy:
+  enabled: true

@@ -4,16 +4,16 @@ metadata:
   name: {{ .Chart.Name }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ .Chart.Name }}
+    app: {{ .Values.labels.app }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Chart.Name }}
+      app: {{ .Values.labels.app }}
   template:
     metadata:
       labels:
-        app: {{ .Chart.Name }}
+        app: {{ .Values.labels.app }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -35,19 +35,19 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "python-app.fullname" . }}-redis
+  name: {{ .Values.labels.app }}-redis
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ include "python-app.name" . }}-redis
+    app: {{ .Values.labels.app }}-redis
 spec:
   replicas: {{ .Values.redis.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "python-app.name" . }}-redis
+      app: {{ .Values.labels.app }}-redis
   template:
     metadata:
       labels:
-        app: {{ include "python-app.name" . }}-redis
+        app: {{ .Values.labels.app }}-redis
     spec:
       containers:
         - name: redis
