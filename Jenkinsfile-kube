@@ -5,7 +5,6 @@ pipeline {
         DOCKERHUB_USER = 'vishwacloudlab'
         DOCKERHUB_cred = credentials('dockerhub-creds') // Jenkins Credential ID
         IMAGE_NAME = 'py-redis-dec25'
-        KUBECONFIG = "/home/jenkins/.kube/config"
         IMAGE_TAG  = "${BUILD_NUMBER}"
     }
 
