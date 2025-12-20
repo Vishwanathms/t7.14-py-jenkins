@@ -21,7 +21,8 @@ pipeline {
                 script {
                //     sh 'git clone git@github.com:Vishwanathms/t7.14-py-jenkins.git'
                     sh 'docker-compose down || true'
-                    sh 'docker image rmi $DOCKERHUB_USER/$IMAGE_NAME:$BUILD_NUMBER || true'
+                    sh 'PREV_BUILD=$((BUILD_NUMBER - 1))'
+                    sh 'docker image rmi $DOCKERHUB_USER/$IMAGE_NAME:$PREV_BUILD || true'
                 }
             }  
         }
