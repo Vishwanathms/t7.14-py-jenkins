@@ -41,15 +41,4 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            sh 'docker ps -a'
-        }
-        success {
-            echo "✅ Pipeline completed successfully!"
-        }
-        failure {
-            echo "❌ Pipeline failed!"
-        }
-    }
 }
