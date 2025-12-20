@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flask-redis-app
+  namespace: u16
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: flask-redis-app
@@ -14,9 +15,9 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: vishwacloudlab/jenkins-docker-lab:latest
+          image: vishwacloudlab/pythonapp:v4-var
           ports:
-            - containerPort: 5000
+            - containerPort: 8000
           env:
             - name: REDIS_HOST
               value: "redis-service"   # Kubernetes Service name for Redis
@@ -25,17 +26,18 @@ spec:
             - name: REDIS_DB
               value: "0"
             - name: APP_PORT
-              value: "5000"
+              value: "8000"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: flask-redis-service
+  name: flask-service
+  namespace: u16
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: flask-redis-app
   ports:
-    - port: 5000
-      targetPort: 5000
-      nodePort: 30080
+    - port: 80
+      targetPort: 8000
+      nodePort: 30280
