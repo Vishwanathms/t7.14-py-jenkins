@@ -4,16 +4,16 @@ metadata:
   name: {{ .Chart.Name }}
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ .Values.labels.app }}
+    app: {{ .Chart.Name }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.labels.app }}
+      app: {{ .Chart.Name }}
   template:
     metadata:
       labels:
-        app: {{ .Values.labels.app }}
+        app: {{ .Chart.Name }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -30,39 +30,30 @@ spec:
               value: "0"
             - name: APP_PORT
               value: "{{ .Values.env.APP_PORT }}"
-
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-<<<<<<< HEAD
   name: {{ include "python-app.fullname" . }}-redis
   namespace: {{ .Values.namespace }}
   labels:
     app: {{ include "python-app.name" . }}-redis
-=======
-  name: {{ .Values.labels.app }}-redis
-  namespace: {{ .Values.namespace }}
-  labels:
-    app: {{ .Values.labels.app }}-redis
->>>>>>> 832a00f843d7fdd71ca5fe999ea3ac637ed16f77
 spec:
   replicas: {{ .Values.redis.replicaCount }}
   selector:
     matchLabels:
-<<<<<<< HEAD
       app: {{ include "python-app.name" . }}-redis
   template:
     metadata:
       labels:
         app: {{ include "python-app.name" . }}-redis
-=======
-      app: {{ .Values.labels.app }}-redis
-  template:
-    metadata:
-      labels:
-        app: {{ .Values.labels.app }}-redis
->>>>>>> 832a00f843d7fdd71ca5fe999ea3ac637ed16f77
     spec:
       containers:
         - name: redis
@@ -70,3 +61,10 @@ spec:
           imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.redis.service.port }}
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"

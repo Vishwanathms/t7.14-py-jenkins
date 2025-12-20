@@ -34,10 +34,17 @@ metadata:
   name: flask-service
   namespace: u16
 spec:
+<<<<<<< HEAD
   type: LoadBalancer
+=======
+  type: NodePort
+>>>>>>> 832a00f843d7fdd71ca5fe999ea3ac637ed16f77
   selector:
     app: flask-redis-app
   ports:
     - port: 80
       targetPort: 8000
+<<<<<<< HEAD
       nodePort: 30280
+=======
+>>>>>>> 832a00f843d7fdd71ca5fe999ea3ac637ed16f77

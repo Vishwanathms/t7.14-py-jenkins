@@ -4,11 +4,11 @@ metadata:
   name: {{ .Chart.Name }}-service
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ .Values.labels.app }}
+    app: {{ .Chart.Name }}
 spec:
   type: {{ .Values.service.type }}
   selector:
-    app: {{ .Values.labels.app }}
+    app: {{ .Chart.Name }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort }}
@@ -18,11 +18,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-<<<<<<< HEAD
   name: {{ include "python-app.fullname" . }}-redis
-=======
-  name: {{ .Values.labels.app }}-redis
->>>>>>> 832a00f843d7fdd71ca5fe999ea3ac637ed16f77
   namespace: {{ .Values.namespace }}
 spec:
   type: ClusterIP

@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: python-app-hpa
+  namespace: argocd        # Argo CD's namespace
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Vishwanathms/t7.14-py-jenkins.git
+    targetRevision: main
+    path: python-app-hpa        # path to your Helm chart in this repo
+    helm:
+      releaseName: python-app-hpa
+      valueFiles:
+        - values.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: u16
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - RespectIgnoreDifferences=true
+      - CreateNamespace=true
+
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: my-app
+      jsonPointers:
+        - /spec/replicas

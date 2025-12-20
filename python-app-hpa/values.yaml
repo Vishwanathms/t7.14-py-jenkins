@@ -1,7 +1,10 @@
 replicaCount: 2
 
-labels:
-  app: u16-python-app
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
 
 image:
   #repository: vishwacloudlab/jenkins-docker-lab
@@ -29,11 +32,4 @@ redis:
     tag: "7"
     pullPolicy: IfNotPresent
   service:
-<<<<<<< HEAD
     port: 6379
-=======
-    port: 6379
-
-networkPolicy:
-  enabled: true
->>>>>>> 832a00f843d7fdd71ca5fe999ea3ac637ed16f77
