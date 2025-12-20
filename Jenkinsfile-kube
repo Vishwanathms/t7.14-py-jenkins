@@ -54,6 +54,15 @@ pipeline {
                 sh 'docker-compose up -d'
             }
         }
+        stage('Deploy to kube') {
+            steps {
+                sh '''
+                  kubectl apply -f kube-files-template
+                  kubectl set image deployment/flask-redis-pp \
+                    flask-app=vishwacloudlab/py-redis-dec25:${IMAGE_TAG}
+                '''
+            }
+        }
     }
 
 }
